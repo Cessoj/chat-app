@@ -3,6 +3,13 @@ import './contact.css';
 import PropTypes from 'prop-types';
 
 class Contact extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            online: false,
+          };
+      }
+
     render(){
         return(
             <div className="Contact">
@@ -10,8 +17,15 @@ class Contact extends Component{
                 <div>
                     <h3 className="name">{this.props.contact.name}</h3>
                     <div className="status"> 
-                        <div className={this.props.contact.online ? 'status-online' : 'status-offline'}></div>
-                        <p className="status-text">{this.props.contact.online ? 'Online' : 'Offline'}</p>
+                        <div className={this.state.online ? 'status-online' : 'status-offline'}></div>
+                            <p className="status-text"
+                                onClick={event => {
+                                const newOnline = !this.state.online;
+                                this.setState({ online: newOnline });
+                                 }}
+                            >
+                                {this.state.online ? 'Online' : 'Offline'}
+                            </p>
                     </div>
                 </div>
             </div>
